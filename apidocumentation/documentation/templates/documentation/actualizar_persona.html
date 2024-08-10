@@ -1,0 +1,42 @@
+<!-- templates/actualizar_persona.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Actualizar una Persona{% endblock %}
+
+{% block content %}
+    <h2>Actualizar una Persona</h2>
+    <div class="endpoint">
+        <h3>PUT /api/personas/&lt;id&gt;/</h3>
+        <p>Este endpoint permite actualizar los datos de una persona específica.</p>
+        <h4>Ejemplo de Solicitud</h4>
+        <pre><code>curl -X PUT http://127.0.0.1:8000/api/personas/1/ \
+-H "Content-Type: application/json" \
+-d '{
+    "nombre": "Merlin El Sabio",
+    "biografia": "Actualización: Merlin ha adoptado el título de El Sabio después de años de estudio...",
+    "fecha_nacimiento": "0900-01-01",
+    "correo_electronico": "merlin.sabio@camelot.com",
+    "numero_telefonico": "+44 1234 567890",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/merlin_sabio",
+        "Instagram": "https://instagram.com/merlin_the_wise"
+    }
+}'</code></pre>
+        <h4>Ejemplo de Respuesta</h4>
+        <pre><code>{
+    "id": 1,
+    "nombre": "Merlin El Sabio",
+    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/merlin.jpg",
+    "biografia": "Actualización: Merlin ha adoptado el título de El Sabio después de años de estudio...",
+    "fecha_nacimiento": "0900-01-01",
+    "correo_electronico": "merlin.sabio@camelot.com",
+    "numero_telefonico": "+44 1234 567890",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/merlin_sabio",
+        "Instagram": "https://instagram.com/merlin_the_wise"
+    }
+}</code></pre>
+        <p><a href="{% url 'update-person' %}">Actualizar una persona en la interfaz</a></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,92 @@
+<!-- templates/read_personas.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Lista de Personas{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">Lista de Personas</h1>
+        <div id="person-container" class="row row-cols-1 row-cols-md-2 g-4"></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/personas/')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById("person-container");
+                data.forEach(person => {
+                    const card = document.createElement("div");
+                    card.className = "card mb-3";
+                    card.style.width = "18rem";
+
+                    const img = document.createElement("img");
+                    img.className = "card-img-top";
+                    img.src = person.foto_perfil;
+                    img.alt = person.nombre;
+
+                    const cardBody = document.createElement("div");
+                    cardBody.className = "card-body";
+
+                    const cardTitle = document.createElement("h5");
+                    cardTitle.className = "card-title";
+                    cardTitle.textContent = person.nombre;
+
+                    const cardText = document.createElement("p");
+                    cardText.className = "card-text";
+                    cardText.textContent = person.biografia;
+
+                    // Botones de CRUD
+                    const buttonsContainer = document.createElement("div");
+                    buttonsContainer.className = "d-flex justify-content-between";
+
+                    const viewButton = document.createElement("a");
+                    viewButton.className = "btn btn-info btn-sm";
+                    viewButton.href = `/api/personas/${person.id}/`;
+                    viewButton.textContent = "Ver";
+
+                    const editButton = document.createElement("a");
+                    editButton.className = "btn btn-warning btn-sm";
+                    editButton.href = `/documentation/update/?id=${person.id}`;
+                    editButton.textContent = "Editar";
+
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "btn btn-danger btn-sm";
+                    deleteButton.textContent = "Eliminar";
+                    deleteButton.onclick = function() {
+                        if (confirm("¿Estás seguro de que deseas eliminar esta persona?")) {
+                            fetch(`/api/personas/${person.id}/`, {
+                                method: 'DELETE',
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert("Persona eliminada exitosamente");
+                                    window.location.reload();
+                                } else {
+                                    alert("Error al eliminar la persona");
+                                }
+                            })
+                            .catch(error => console.error('Error:', error));
+                        }
+                    };
+
+                    buttonsContainer.appendChild(viewButton);
+                    buttonsContainer.appendChild(editButton);
+                    buttonsContainer.appendChild(deleteButton);
+
+                    cardBody.appendChild(cardTitle);
+                    cardBody.appendChild(cardText);
+                    cardBody.appendChild(buttonsContainer);
+
+                    card.appendChild(img);
+                    card.appendChild(cardBody);
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+{% endblock %}

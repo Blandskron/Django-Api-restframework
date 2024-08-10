@@ -1,0 +1,43 @@
+<!-- templates/crear_persona.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Crear una Nueva Persona{% endblock %}
+
+{% block content %}
+    <h2>Crear una Nueva Persona</h2>
+    <div class="endpoint">
+        <h3>POST /api/personas/</h3>
+        <p>Este endpoint permite crear un nuevo registro de persona.</p>
+        <h4>Ejemplo de Solicitud</h4>
+        <pre><code>curl -X POST http://127.0.0.1:8000/api/personas/ \
+-H "Content-Type: application/json" \
+-d '{
+    "nombre": "Aurora la Superheroína",
+    "foto_perfil": "ruta/a/la/imagen.jpg",
+    "biografia": "Aurora es una superheroína que lucha incansablemente para salvar al mundo...",
+    "fecha_nacimiento": "1995-05-12",
+    "correo_electronico": "aurora.heroine@justiceleague.com",
+    "numero_telefonico": "+1 555 9876543",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/aurora_superhero",
+        "Instagram": "https://instagram.com/aurora_light_warrior"
+    }
+}'</code></pre>
+        <h4>Ejemplo de Respuesta</h4>
+        <pre><code>{
+    "id": 2,
+    "nombre": "Aurora la Superheroína",
+    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/aurora.jpg",
+    "biografia": "Aurora es una superheroína que lucha incansablemente para salvar al mundo...",
+    "fecha_nacimiento": "1995-05-12",
+    "correo_electronico": "aurora.heroine@justiceleague.com",
+    "numero_telefonico": "+1 555 9876543",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/aurora_superhero",
+        "Instagram": "https://instagram.com/aurora_light_warrior"
+    }
+}</code></pre>
+        <p><a href="{% url 'create-person' %}">Crear una nueva persona en la interfaz</a></p>
+    </div>
+{% endblock %}

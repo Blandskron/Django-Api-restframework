@@ -1,0 +1,38 @@
+<!-- templates/documentation/delete_person.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Persona</title>
+    <script>
+        function deletePerson(event) {
+            event.preventDefault();
+            const id = document.getElementById("id").value;
+
+            fetch(`/api/personas/${id}/`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Persona eliminada exitosamente");
+                } else {
+                    alert("Error al eliminar la persona");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Eliminar Persona</h1>
+    <form onsubmit="deletePerson(event)">
+        <label for="id">ID de la Persona:</label><br>
+        <input type="number" id="id" name="id" required><br><br>
+        <input type="submit" value="Eliminar Persona">
+    </form>
+</body>
+</html>

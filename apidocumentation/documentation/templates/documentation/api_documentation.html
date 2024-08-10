@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación de la API - Gestión de Personas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 56px; /* Ajuste para el tamaño del navbar */
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff;
+        }
+        .navbar-brand:hover, .navbar-nav .nav-link:hover {
+            color: #ccc;
+        }
+        .sidebar {
+            height: 100%;
+            position: fixed;
+            top: 56px;
+            left: -250px; /* Inicialmente oculto fuera del viewport */
+            width: 250px;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            border-right: 1px solid #dee2e6;
+            transition: left 0.3s ease; /* Transición suave al abrir/cerrar */
+            overflow-y: auto; /* Permite desplazamiento vertical si es necesario */
+        }
+        .sidebar.open {
+            left: 0; /* Mostrar completamente cuando está abierto */
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #343a40;
+            display: block;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #e9ecef;
+            color: #0056b3;
+        }
+        .content {
+            margin-left: 0; /* Inicialmente sin margen */
+            padding: 20px;
+            padding-top: 0; /* Ajuste para evitar duplicación de espacios */
+            transition: margin-left 0.3s ease; /* Transición suave al abrir/cerrar */
+        }
+        .content.open {
+            margin-left: 250px; /* Ajuste para dar espacio al sidebar cuando está abierto */
+        }
+        .content h2 {
+            margin-top: 0;
+        }
+        .content pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .toggle-theme {
+            cursor: pointer;
+            color: #fff;
+            margin-left: auto;
+        }
+        body.dark-mode {
+            background-color: #343a40;
+            color: #fff;
+        }
+        body.dark-mode .navbar {
+            background-color: #212529;
+        }
+        body.dark-mode .navbar-brand, body.dark-mode .navbar-nav .nav-link {
+            color: #fff;
+        }
+        body.dark-mode .navbar-brand:hover, body.dark-mode .navbar-nav .nav-link:hover {
+            color: #ccc;
+        }
+        body.dark-mode .sidebar {
+            background-color: #343a40;
+            border-right: 1px solid #495057;
+        }
+        body.dark-mode .sidebar a {
+            color: #fff;
+        }
+        body.dark-mode .sidebar a:hover {
+            background-color: #495057;
+            color: #fff;
+        }
+        body.dark-mode .content pre {
+            background-color: #495057;
+            color: #fff;
+        }
+        .menu-toggle {
+            cursor: pointer;
+            color: #fff;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .menu-toggle:hover {
+            color: #ccc;
+        }
+        .endpoint {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        body.dark-mode .endpoint {
+            background-color: #495057;
+            border-color: #343a40;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+        <a class="navbar-brand" href="#">Documentación</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Acerca de</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link toggle-theme" onclick="toggleTheme()">🌙</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#section1">Obtener Lista de Personas</a>
+        <a href="#section2">Crear una Nueva Persona</a>
+        <a href="#section3">Obtener Detalles de una Persona</a>
+        <a href="#section4">Actualizar una Persona</a>
+        <a href="#section5">Eliminar una Persona</a>
+    </div>
+
+    <div class="content" id="content">
+        <h2 id="section1">Obtener Lista de Personas</h2>
+        <div class="endpoint">
+            <h3>GET /api/personas/</h3>
+            <p>Este endpoint devuelve una lista de todas las personas registradas en la base de datos.</p>
+            <h4>Ejemplo de Solicitud</h4>
+            <pre><code>curl -X GET http://127.0.0.1:8000/api/personas/</code></pre>
+            <h4>Ejemplo de Respuesta</h4>
+            <pre><code>[
+    {
+        "id": 1,
+        "nombre": "Merlin El Hechicero",
+        "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/merlin.jpg",
+        "biografia": "Merlin es un mago legendario conocido por su sabiduría y poder en el manejo de las artes mágicas...",
+        "fecha_nacimiento": "0900-01-01",
+        "correo_electronico": "merlin.mago@camelot.com",
+        "numero_telefonico": "+44 1234 567890",
+        "redes_sociales": {
+            "Twitter": "https://twitter.com/merlin_magician",
+            "Instagram": "https://instagram.com/merlin_the_wise"
+        }
+    },
+    ...
+]</code></pre>
+            <p><a href="{% url 'read-persons' %}">Ver lista de personas en la interfaz</a></p>
+        </div>
+
+        <h2 id="section2">Crear una Nueva Persona</h2>
+        <div class="endpoint">
+            <h3>POST /api/personas/</h3>
+            <p>Este endpoint permite crear un nuevo registro de persona.</p>
+            <h4>Ejemplo de Solicitud</h4>
+            <pre><code>curl -X POST http://127.0.0.1:8000/api/personas/ \
+-H "Content-Type: application/json" \
+-d '{
+    "nombre": "Aurora la Superheroína",
+    "foto_perfil": "ruta/a/la/imagen.jpg",
+    "biografia": "Aurora es una superheroína que lucha incansablemente para salvar al mundo...",
+    "fecha_nacimiento": "1995-05-12",
+    "correo_electronico": "aurora.heroine@justiceleague.com",
+    "numero_telefonico": "+1 555 9876543",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/aurora_superhero",
+        "Instagram": "https://instagram.com/aurora_light_warrior"
+    }
+}'</code></pre>
+            <h4>Ejemplo de Respuesta</h4>
+            <pre><code>{
+    "id": 2,
+    "nombre": "Aurora la Superheroína",
+    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/aurora.jpg",
+    "biografia": "Aurora es una superheroína que lucha incansablemente para salvar al mundo...",
+    "fecha_nacimiento": "1995-05-12",
+    "correo_electronico": "aurora.heroine@justiceleague.com",
+    "numero_telefonico": "+1 555 9876543",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/aurora_superhero",
+        "Instagram": "https://instagram.com/aurora_light_warrior"
+    }
+}</code></pre>
+            <p><a href="{% url 'create-person' %}">Crear una nueva persona en la interfaz</a></p>
+        </div>
+
+        <h2 id="section3">Obtener Detalles de una Persona</h2>
+        <div class="endpoint">
+            <h3>GET /api/personas/&lt;id&gt;/</h3>
+            <p>Este endpoint devuelve los detalles de una persona específica según el ID proporcionado.</p>
+            <h4>Ejemplo de Solicitud</h4>
+            <pre><code>curl -X GET http://127.0.0.1:8000/api/personas/1/</code></pre>
+            <h4>Ejemplo de Respuesta</h4>
+            <pre><code>{
+    "id": 1,
+    "nombre": "Merlin El Hechicero",
+    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/merlin.jpg",
+    "biografia": "Merlin es un mago legendario conocido por su sabiduría y poder en el manejo de las artes mágicas...",
+    "fecha_nacimiento": "0900-01-01",
+    "correo_electronico": "merlin.mago@camelot.com",
+    "numero_telefonico": "+44 1234 567890",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/merlin_magician",
+        "Instagram": "https://instagram.com/merlin_the_wise"
+    }
+}</code></pre>
+            <p><a href="{% url 'read-persons' %}">Ver lista de personas en la interfaz</a></p>
+        </div>
+
+        <h2 id="section4">Actualizar una Persona</h2>
+        <div class="endpoint">
+            <h3>PUT /api/personas/&lt;id&gt;/</h3>
+            <p>Este endpoint permite actualizar los datos de una persona específica.</p>
+            <h4>Ejemplo de Solicitud</h4>
+            <pre><code>curl -X PUT http://127.0.0.1:8000/api/personas/1/ \
+-H "Content-Type: application/json" \
+-d '{
+    "nombre": "Merlin El Sabio",
+    "biografia": "Actualización: Merlin ha adoptado el título de El Sabio después de años de estudio...",
+    "fecha_nacimiento": "0900-01-01",
+    "correo_electronico": "merlin.sabio@camelot.com",
+    "numero_telefonico": "+44 1234 567890",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/merlin_sabio",
+        "Instagram": "https://instagram.com/merlin_the_wise"
+    }
+}'</code></pre>
+            <h4>Ejemplo de Respuesta</h4>
+            <pre><code>{
+    "id": 1,
+    "nombre": "Merlin El Sabio",
+    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/merlin.jpg",
+    "biografia": "Actualización: Merlin ha adoptado el título de El Sabio después de años de estudio...",
+    "fecha_nacimiento": "0900-01-01",
+    "correo_electronico": "merlin.sabio@camelot.com",
+    "numero_telefonico": "+44 1234 567890",
+    "redes_sociales": {
+        "Twitter": "https://twitter.com/merlin_sabio",
+        "Instagram": "https://instagram.com/merlin_the_wise"
+    }
+}</code></pre>
+            <p><a href="{% url 'update-person' %}">Actualizar una persona en la interfaz</a></p>
+        </div>
+
+        <h2 id="section5">Eliminar una Persona</h2>
+        <div class="endpoint">
+            <h3>DELETE /api/personas/&lt;id&gt;/</h3>
+            <p>Este endpoint elimina una persona de la base de datos según el ID proporcionado.</p>
+            <h4>Ejemplo de Solicitud</h4>
+            <pre><code>curl -X DELETE http://127.0.0.1:8000/api/personas/1/</code></pre>
+            <h4>Ejemplo de Respuesta</h4>
+            <pre><code>{}</code></pre>
+            <p><a href="{% url 'delete-person' %}">Eliminar una persona en la interfaz</a></p>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+
+            const content = document.getElementById('content');
+            content.classList.toggle('open');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeToggle = document.querySelector('.toggle-theme');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
