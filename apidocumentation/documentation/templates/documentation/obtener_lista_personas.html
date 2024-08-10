@@ -10,22 +10,116 @@
         <h4>Ejemplo de Solicitud</h4>
         <pre><code>curl -X GET http://127.0.0.1:8000/api/personas/</code></pre>
         <h4>Ejemplo de Respuesta</h4>
-        <pre><code>[
-{
-    "id": 1,
-    "nombre": "Merlin El Hechicero",
-    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/merlin.jpg",
-    "biografia": "Merlin es un mago legendario conocido por su sabiduría y poder en el manejo de las artes mágicas...",
-    "fecha_nacimiento": "0900-01-01",
-    "correo_electronico": "merlin.mago@camelot.com",
-    "numero_telefonico": "+44 1234 567890",
-    "redes_sociales": {
-        "Twitter": "https://twitter.com/merlin_magician",
-        "Instagram": "https://instagram.com/merlin_the_wise"
-    }
-},
-...
-]</code></pre>
-        <p><a href="{% url 'read-persons' %}">Ver lista de personas en la interfaz</a></p>
+        <pre><code>HTTP 200 OK
+            Allow: GET, POST, HEAD, OPTIONS
+            Content-Type: application/json
+            Vary: Accept
+            
+            [
+                {
+                    "id": 1,
+                    "nombre": "Merlin El Hechicero",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/Merlin.jpg",
+                    "biografia": "Merlin es un mago legendario conocido por su sabiduría y poder en el manejo de las artes mágicas. Su misión es proteger al reino de los peligros sobrenaturales.",
+                    "fecha_nacimiento": "1621-01-09",
+                    "correo_electronico": "merlin.mago@camelot.com",
+                    "numero_telefonico": "+44 1234 567890",
+                    "redes_sociales": {
+                        "Twitter": "https://twitter.com/merlin_magician",
+                        "Instagram": "https://instagram.com/merlin_the_wise"
+                    }
+                },
+                {
+                    "id": 2,
+                    "nombre": "Aurora la Superheroína",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/aurora.jpg",
+                    "biografia": "Aurora es una superheroína que lucha incansablemente para salvar al mundo de las fuerzas del mal. Sus poderes incluyen la manipulación de la luz y la energía.",
+                    "fecha_nacimiento": "1995-05-12",
+                    "correo_electronico": "aurora.heroine@justiceleague.com",
+                    "numero_telefonico": "+1 555 9876543",
+                    "redes_sociales": {
+                        "Twitter": "https://twitter.com/aurora_superhero",
+                        "Instagram": "https://instagram.com/aurora_light_warrior"
+                    }
+                },
+                {
+                    "id": 3,
+                    "nombre": "Bruno El Obrero",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/bruno.jpg",
+                    "biografia": "Bruno es un trabajador dedicado que ha pasado su vida construyendo los cimientos de la ciudad. Es conocido por su fuerza y dedicación a su oficio.",
+                    "fecha_nacimiento": "1978-11-22",
+                    "correo_electronico": "bruno.obrero@workheroes.com",
+                    "numero_telefonico": "+39 320 9876543",
+                    "redes_sociales": {
+                        "LinkedIn": "https://linkedin.com/in/bruno_the_builder",
+                        "Facebook": "https://facebook.com/bruno_construction_hero"
+                    }
+                },
+                {
+                    "id": 4,
+                    "nombre": "Gandalf el Blanco",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/sabio.jpg",
+                    "biografia": "Gandalf es un mago poderoso y sabio, conocido por su papel en la Guerra del Anillo y por ser una figura clave en la lucha contra Sauron.",
+                    "fecha_nacimiento": "1979-03-10",
+                    "correo_electronico": "gandalf.blanco@middleearth.com",
+                    "numero_telefonico": "+64 21 123 4567",
+                    "redes_sociales": {
+                        "Twitter": "https://twitter.com/gandalf_the_white",
+                        "Instagram": "https://instagram.com/gandalf_wizard"
+                    }
+                },
+                {
+                    "id": 5,
+                    "nombre": "Diana la Amazona",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/amazona.jpg",
+                    "biografia": "Diana, también conocida como Wonder Woman, es una princesa amazona dotada de fuerza, velocidad, y habilidades de combate extraordinarias.",
+                    "fecha_nacimiento": "2017-06-22",
+                    "correo_electronico": "diana.princess@themyscira.com",
+                    "numero_telefonico": "+1 555 987 6543",
+                    "redes_sociales": {
+                        "Twitter": "https://twitter.com/wonder_woman",
+                        "Instagram": "https://instagram.com/diana_amazon"
+                    }
+                },
+                {
+                    "id": 6,
+                    "nombre": "Arthur el Rey",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/artur.jpg",
+                    "biografia": "Arthur Pendragon, conocido como el Rey Arturo, es el legendario líder que unió a los caballeros de la Mesa Redonda y empuñó la espada Excalibur.",
+                    "fecha_nacimiento": "1975-06-20",
+                    "correo_electronico": "king.arthur@camelot.com",
+                    "numero_telefonico": "+4 207 946 0958",
+                    "redes_sociales": {
+                        "Twitter": "https://twitter.com/king_arthur",
+                        "Instagram": "https://instagram.com/arthur_of_camelot"
+                    }
+                },
+                {
+                    "id": 7,
+                    "nombre": "Leia Organa",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/leia.jpg",
+                    "biografia": "Leia Organa es una líder valiente de la Alianza Rebelde y una figura clave en la lucha contra el Imperio Galáctico.",
+                    "fecha_nacimiento": "1959-10-21",
+                    "correo_electronico": "leia.organa@rebelalliance.com",
+                    "numero_telefonico": "+1 212 555 0199",
+                    "redes_sociales": {
+                        "Twitter": "https://twitter.com/princess_leia",
+                        "Instagram": "https://instagram.com/leia_organa"
+                    }
+                },
+                {
+                    "id": 8,
+                    "nombre": "Frodo Bolsón",
+                    "foto_perfil": "http://127.0.0.1:8000/media/fotos_perfil/frodo.jpg",
+                    "biografia": "Frodo es un hobbit de la Comarca que se convirtió en el portador del Anillo Único en la misión de destruirlo en los fuegos del Monte del Destino.",
+                    "fecha_nacimiento": "2011-02-25",
+                    "correo_electronico": "frodo.baggins@hobbiton.com",
+                    "numero_telefonico": "+64 27 987 6543",
+                    "redes_sociales": {
+                        "Twitter": "https://twitter.com/frodo_ringbearer",
+                        "Instagram": "https://instagram.com/frodo_hobbit"
+                    }
+                }
+            ]</code></pre>
     </div>
 {% endblock %}
